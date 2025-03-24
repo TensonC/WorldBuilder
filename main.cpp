@@ -147,7 +147,7 @@ void MapRender()
 		}
 		
 		//cout << noise << endl;
-		if (noise <= cp1.index)//Ë®
+		if (noise <= cp1.index)//å½Š
 		{
 			
 			t = noise / cp1.index;
@@ -155,7 +155,7 @@ void MapRender()
 			PutTile(7, 15, &tile.maptile);
 
 		}
-		else if (noise <= cp2.index)//É½Çð
+		else if (noise <= cp2.index)//î€œí—´
 		{
 			
 			t = (noise - cp1.index) / (cp2.index - cp1.index);
@@ -164,19 +164,19 @@ void MapRender()
 			SDL_SetTextureColorMod(texture, 100-50*(1-t), 50+130*(1-t), 20);
 			if (t <= t1)
 			{
-				PutTile(2, 14, &tile.maptile);//µÍº£°ÎÈÈ´øÓêÁÖ
+				PutTile(2, 14, &tile.maptile);//ë´ë² ê²„í›‘ë˜é»›ì£¼
 			}
 			else if (t <= t2)
 			{
-				PutTile(6, 0, &tile.maptile);//ÖÐº£°ÎÀ«Ò¶ÁÖ
+				PutTile(6, 0, &tile.maptile);//æ«“ë² ê²„ìœ”ç§Šì£¼
 			}
 			else
 			{
-				PutTile(7, 14, &tile.maptile);//¸ßº£°ÎÕëÒ¶ÁÖ
+				PutTile(7, 14, &tile.maptile);//ë©•ë² ê²„æ¿¾ç§Šì£¼
 			}
 			
 		}
-		else if (noise <= cp3.index)//É½µØ
+		else if (noise <= cp3.index)//î€œë’ˆ
 		{
 			
 			t = (noise - cp2.index) / (cp3.index - cp2.index);
@@ -185,30 +185,30 @@ void MapRender()
 			SDL_SetTextureColorMod(texture, 180-60*t, 150-70*t, 100-50*t);
 			if (t <= t1)
 			{
-				PutTile(14, 6, &tile.maptile);//Ð¡Çð
+				PutTile(14, 6, &tile.maptile);//é¬¼í—´
 			}
 			else if (t <= t2)
 			{
-				PutTile(15, 14, &tile.maptile);//É½µØ
+				PutTile(15, 14, &tile.maptile);//î€œë’ˆ
 			}
 			else
 			{
-				PutTile(15, 7, &tile.maptile);//É½½Å
+				PutTile(15, 7, &tile.maptile);//î€œì‹ 
 			}
 			
 		}
-		else//É½·å
+		else//î€œë£Ÿ
 		{
 			t = (noise - cp3.index) / (1 - cp3.index);
 			t2 = double(1) / 3;
 			SDL_SetTextureColorMod(texture, 150 + 90 * t, 150 + 90 * t, 150 + 90 * t);
 			if (t <= t2)
 			{
-				PutTile(15, 7, &tile.maptile);//É½Âö
+				PutTile(15, 7, &tile.maptile);//î€œì°§
 			}
 			else
 			{
-				PutTile(14, 1, &tile.maptile);//É½·å
+				PutTile(14, 1, &tile.maptile);//î€œë£Ÿ
 			}
 			
 
@@ -222,8 +222,8 @@ void MapRender()
 
 void Render()
 {
-	SDL_SetRenderDrawColor(render, 0, 0, 0, 255);//ÉèÖÃ±³¾°ÑÕÉ«
-	SDL_RenderClear(render);//Çå¿ÕÆÁÄ»
+	SDL_SetRenderDrawColor(render, 0, 0, 0, 255);//î‡é›¶êµì’¼ï¤Œî€Š
+	SDL_RenderClear(render);//í—Œì™•íŒìº¥
 	
 	
 	SDL_SetRenderDrawColor(render, 255, 255, 255, 255);
@@ -231,7 +231,7 @@ void Render()
 	ControlPointRender();
 	SelectRectRender();
 	MapRender();
-	//FontRender({ Rebuild.x,Rebuild.y+50,100,50 },"ÖØ¹¹");
+	//FontRender({ Rebuild.x,Rebuild.y+50,100,50 },"è·¯ë­");
 	SDL_RenderPresent(render);
 }
 void Init()
