@@ -4,7 +4,7 @@
 #include <random>
 
 using namespace std;
-//¹şÏ£Êı×é
+//å“ˆå¸Œæ•°ç»„
 int p[] = {
 	151,160,137,91,90,15,
 	131,13,201,95,96,53,194,233,7,225,140,36,103,30,69,142,8,99,37,240,21,10,23,
@@ -20,7 +20,7 @@ int p[] = {
 	49,192,214, 31,181,199,106,157,184, 84,204,176,115,121,50,45,127, 4,150,254,
 	138,236,205,93,222,114,67,29,24,72,243,141,128,195,78,66,215,61,156,180,
 };
-int seed;//µØÍ¼ÖÖ×Ó
+int seed;//åœ°å›¾ç§å­
 int new_p[512];
 void make_new_p()
 {
@@ -34,10 +34,10 @@ void make_new_p()
 		new_p[i] = p[(i * seed) & 255];
 	}
 }
-//¶şÎ¬ÏòÁ¿¶¨Òå
+//äºŒç»´å‘é‡å®šä¹‰
 struct V2 {
 	double x, y;
-	V2(double x = 0, double y = 0) : x(x), y(y) {}//³õÊ¼»¯Îª0
+	V2(double x = 0, double y = 0) : x(x), y(y) {}//åˆå§‹åŒ–ä¸º0
 };
 const V2 gradient[] = {
 	{1,1}, {1,-1}, {-1,1}, {-1,-1},
@@ -45,13 +45,13 @@ const V2 gradient[] = {
 };
 
 
-//»ººÍÇúÏß
+//ç¼“å’Œæ›²çº¿
 double fade(double t)
 {
 	//return t * t * (3 - 2 * t);
 	return t * t * t * (t * (t * 6 - 15) + 10);
 }
-//¼ÆËãÌİ¶ÈºÍµã»ı
+//è®¡ç®—æ¢¯åº¦å’Œç‚¹ç§¯
 /*
 double dot(int hash, double x, double y)
 {
@@ -115,7 +115,7 @@ V2 getGradient(int x, int y)
 	return gradient[hash];
 }
 
-//È¡Õû
+//å–æ•´
 int flashfloor(double x)
 {
 	return x > 0 ? (int)x : (int)x - 1;
@@ -126,14 +126,14 @@ double lerp(double x, double a, double b)
 	return a + x * (b - a);
 }
 
-//¼ÆËãÔëÉù
+//è®¡ç®—å™ªå£°
 double perlin(double x, double y)
 {
 	std::default_random_engine e;
 	std::uniform_real_distribution<double> un(-1, 1);
 	e.seed(time(0));
 
-	x = fmodl(x, 256) + un(e);//Ìí¼ÓËæ»úÈÅ¶¯
+	x = fmodl(x, 256) + un(e);//æ·»åŠ éšæœºæ‰°åŠ¨
 	y = fmodl(y, 256) + un(e);
 
 	make_new_p();
@@ -145,24 +145,24 @@ double perlin(double x, double y)
 
 	V2 w1 = { x - xn,y - yn };
 
-	double u = fade(xf);//»ººÍºóµÄx
-	double v = fade(yf);//»ººÍºóµÄy
+	double u = fade(xf);//ç¼“å’Œåçš„x
+	double v = fade(yf);//ç¼“å’Œåçš„y
 
-	int p1 = new_p[new_p[xn] + yn];//×óÏÂ½ÇµÄ¹şÏ£
-	int p2 = new_p[new_p[(xn + 1)] + yn];//ÓÒÏÂ½ÇµÄ¹şÏ£
-	int p3 = new_p[new_p[xn] + yn + 1];//×óÉÏ½ÇµÄ¹şÏ£
-	int p4 = new_p[new_p[xn + 1] + yn + 1];//ÓÒÉÏ½ÇµÄ¹şÏ£
+	int p1 = new_p[new_p[xn] + yn];//å·¦ä¸‹è§’çš„å“ˆå¸Œ
+	int p2 = new_p[new_p[(xn + 1)] + yn];//å³ä¸‹è§’çš„å“ˆå¸Œ
+	int p3 = new_p[new_p[xn] + yn + 1];//å·¦ä¸Šè§’çš„å“ˆå¸Œ
+	int p4 = new_p[new_p[xn + 1] + yn + 1];//å³ä¸Šè§’çš„å“ˆå¸Œ
 
-	double v1 = lerp(u, dot(p1, xf, yf), dot(p2, xf - 1, yf));//ÏÂ·½ÔÚx·½ÏòÉÏµÄ²åÖµ(ºóÁ½¸ö²ÎÊıÊÇ¾àÀëÏòÁ¿)
-	double v2 = lerp(u, dot(p3, xf, yf - 1), dot(p4, xf - 1, yf - 1));//ÉÏ·½ÔÚx·½ÏòÉÏµÄ²åÖµ
-	double v3 = lerp(v, v1, v2);//ÔÚy·½ÏòÉÏµÄ²åÖµ
+	double v1 = lerp(u, dot(p1, xf, yf), dot(p2, xf - 1, yf));//ä¸‹æ–¹åœ¨xæ–¹å‘ä¸Šçš„æ’å€¼(åä¸¤ä¸ªå‚æ•°æ˜¯è·ç¦»å‘é‡)
+	double v2 = lerp(u, dot(p3, xf, yf - 1), dot(p4, xf - 1, yf - 1));//ä¸Šæ–¹åœ¨xæ–¹å‘ä¸Šçš„æ’å€¼
+	double v3 = lerp(v, v1, v2);//åœ¨yæ–¹å‘ä¸Šçš„æ’å€¼
 	return (v3 / sqrt(2) + 1) / 2;
 }
 
 double perlin_pro(double x, double y)
 {
 
-	//	x = fmodl(x, 256) + un(e);//Ìí¼ÓËæ»úÈÅ¶¯
+	//	x = fmodl(x, 256) + un(e);//æ·»åŠ éšæœºæ‰°åŠ¨
 	//	y = fmodl(y, 256) + un(e);
 		//x = x + un(e);
 		//y = y + un(e);
@@ -173,13 +173,13 @@ double perlin_pro(double x, double y)
 	double xf = x - flashfloor(x);
 	double yf = y - flashfloor(y);
 
-	double u = fade(xf);//»ººÍ
+	double u = fade(xf);//ç¼“å’Œ
 	double v = fade(yf);
 
 	V2 topRight(xf - 1.0, yf - 1.0);
 	V2 topLeft(xf, yf - 1.0);
 	V2 bottomRight(xf - 1.0, yf);
-	V2 bottomLeft(xf, yf);//ËÄ¸ö¾àÀëÏòÁ¿
+	V2 bottomLeft(xf, yf);//å››ä¸ªè·ç¦»å‘é‡
 
 	double v1 = lerp(u, multdot(bottomLeft, getGradient(xn, yn)), multdot(bottomRight, getGradient(xn + 1, yn)));
 	double v2 = lerp(u, multdot(topLeft, getGradient(xn, yn + 1)), multdot(topRight, getGradient(xn + 1, yn + 1)));
@@ -200,8 +200,7 @@ double OctavePerlin(double x, double y, int octaves, double persistence)
 		amplitude *= persistence;
 		frequency *= 2;
 	}
-	double result = sin(M_PI * (total / maxValue) * 0.5);//ÏŞÖÆÔÚ0-1Ö®¼ä
-	//double result = total / maxValue;
-	result = powf(result,3);//¶¸ÇÍ»¯
+	double result = total / maxValue;
+	result = abs((result - 0.3) / 0.4);//åˆ†å¸ƒå¤„ç†
 	return  result;
 }
