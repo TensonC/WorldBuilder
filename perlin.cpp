@@ -201,6 +201,6 @@ double OctavePerlin(double x, double y, int octaves, double persistence)
 		frequency *= 2;
 	}
 	double result = total / maxValue;
-	result = abs((result - 0.3) / 0.4);//分布处理
+	result = sin(((result - 0.3) / 0.4)*M_PI/2);//分布处理
 	return  result;
 }
